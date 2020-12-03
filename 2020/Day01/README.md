@@ -3,6 +3,7 @@ dotnet run -- <path_to_data_file>
 
 # Example Output
 
+```
 Reading data...
 Read 200 lines
 Searching for solution A...
@@ -17,3 +18,4 @@ First Number: 874 Second Number: 890 Third Number: 256
 ========================================
 Solution B: 199132160
 ========================================
+```
