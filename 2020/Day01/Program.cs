@@ -120,6 +120,15 @@ namespace Day01
                 return;
             }
 
+            Console.WriteLine("");
+            Console.WriteLine("+--------------------------------------------+");
+            Console.WriteLine("|  A D V E N T  O F  C O D E     D A Y  0 1  |");
+            Console.WriteLine("+--------------------------------------------+");
+            Console.WriteLine("");
+            Console.WriteLine("Solution A: Find which two numbers add to \'2020\', multiply them for the answer.");
+            Console.WriteLine("Solution B: Find which three numbers add to \'2020\', multiply them for the answer.");
+            Console.WriteLine("");
+
             var data_file_path = command_args[0];
             try
             {

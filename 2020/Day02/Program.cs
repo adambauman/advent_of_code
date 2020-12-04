@@ -101,6 +101,49 @@ namespace Day02
             return valid_count;
         }
 
+        private static uint SolveB(List<PasswordData> password_datas)
+        {
+            Debug.Assert(0 != password_datas.Count);
+
+            Console.WriteLine("Searching for Solution B...");
+
+            uint valid_count = 0;
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            foreach (var password_data in password_datas)
+            {
+                Debug.Assert(!String.IsNullOrEmpty(password_data.Password));
+
+                var password = password_data.Password;
+                var character = password_data.RequiredCharacter;
+                (int, int) one_indexed_positions = (password_data.AcceptedRange.Item1 - 1, password_data.AcceptedRange.Item2 - 1);
+
+                // Avoid going out of bounds because of switch to one-based indexing
+                if (one_indexed_positions.Item1 < 0) { continue; }
+
+                // Only one position may contain the required character.
+                if (password[one_indexed_positions.Item1] == character || password[one_indexed_positions.Item2] == character)
+                {
+                    if (password[one_indexed_positions.Item1] == character && password[one_indexed_positions.Item2] == character)
+                    {
+                        // Invalid, both indexes can't contain the value, move to the next password
+                        continue;
+                    }
+
+                } else {
+                    // No match, move onto the next password
+                    continue;
+                }
+
+                // Made it this far in the loop? We have a match!
+                valid_count += 1;
+            }
+            stopwatch.Stop();
+            Console.WriteLine("Found solution in " + stopwatch.ElapsedTicks.ToString() + " ticks");
+
+            return valid_count;
+        }
+
         static void Main(string[] command_args)
         {
             if (1 != command_args.Length)
@@ -115,16 +158,22 @@ namespace Day02
             Console.WriteLine("+--------------------------------------------+");
             Console.WriteLine("");
             Console.WriteLine("Solution A: Find out how many passwords are valid according to policy");
-            Console.WriteLine("Solution B: ??");
+            Console.WriteLine("Solution B: Policy has changed, no longer dealing with a range but abolute positions");
             Console.WriteLine("");
 
             var data_file_path = command_args[0];
             try
             {
                 List<PasswordData> data = ReadData(data_file_path);
+
                 uint solution_a = SolveA(data);
                 Console.WriteLine("========================================");
                 Console.WriteLine("Solution A: " + solution_a.ToString());
+                Console.WriteLine("========================================");
+
+                uint solution_b = SolveB(data);
+                Console.WriteLine("========================================");
+                Console.WriteLine("Solution B: " + solution_b.ToString());
                 Console.WriteLine("========================================");
 
             }
