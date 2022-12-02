@@ -27,7 +27,17 @@ def main():
                 continue
     
     elf_totals = sorted(elf_totals)
-    print(elf_totals)
+    
+    #print(elf_totals)
+    print("Part 1: ", elf_totals[len(elf_totals)-1], " calories")
+
+    top_three_totals = elf_totals.pop()
+    top_three_totals += elf_totals.pop()
+    top_three_totals += elf_totals.pop()
+
+    print("Part 2: ", top_three_totals, " calories")
+
+
 
 if __name__ == '__main__':
     sys.exit(main())
