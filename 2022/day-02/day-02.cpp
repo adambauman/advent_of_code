@@ -29,14 +29,102 @@ namespace Guide {
         constexpr auto paper    { 'B' };
         constexpr auto scissors { 'C' };
     }
-    namespace YourResponse {
-        constexpr auto rock     { 'X' };
-        constexpr auto paper    { 'Y' };
-        constexpr auto scissors { 'Z' };
+    namespace Response {
+        namespace Shape {
+            constexpr auto rock     { 'X' };
+            constexpr auto paper    { 'Y' };
+            constexpr auto scissors { 'Z' };
+        }
+        namespace Result {
+            constexpr auto loss { 'X' };
+            constexpr auto draw { 'Y' };
+            constexpr auto win  { 'Z' };
+        }
     }
+
 }
 
+namespace ByPlay {
+    inline int get_rock_result(const char your_response) {
+        switch (your_response) {
+        case Guide::Response::Shape::paper:
+            return(Score::Shape::paper + Score::Result::win);
+        case Guide::Response::Shape::scissors:
+            return(Score::Shape::scissors + Score::Result::loss);
+        case Guide::Response::Shape::rock:
+            return(Score::Shape::rock + Score::Result::draw);
+        default:
+            throw(std::exception("Get rock play score"));
+        }
+    }
+    inline int get_paper_result(const char your_response) {
+        switch (your_response) {
+        case Guide::Response::Shape::scissors:
+            return(Score::Shape::scissors + Score::Result::win);
+        case Guide::Response::Shape::rock:
+            return(Score::Shape::rock + Score::Result::loss);
+        case Guide::Response::Shape::paper:
+            return(Score::Shape::paper + Score::Result::draw);
+        default:
+            throw(std::exception("Get paper play score"));
+        }
+    }
+    inline int get_scissors_result(const char your_response) {
+        switch (your_response) {
+        case Guide::Response::Shape::rock:
+            return(Score::Shape::rock + Score::Result::win);
+        case Guide::Response::Shape::paper:
+            return(Score::Shape::paper + Score::Result::loss);
+        case Guide::Response::Shape::scissors:
+            return(Score::Shape::scissors + Score::Result::draw);
+        default:
+            throw(std::exception("Get scissors play score"));
+        }
+    }
+
+} // namespace PartOne
+namespace ByResult {
+    inline int get_rock_result(const char desired_result) {
+        switch (desired_result) {
+        case Guide::Response::Result::draw:
+            return(Score::Shape::rock + Score::Result::draw);
+        case Guide::Response::Result::loss:
+            return(Score::Shape::scissors + Score::Result::loss);
+        case Guide::Response::Result::win:
+            return(Score::Shape::paper + Score::Result::win);
+        default:
+            throw(std::exception("Get rock result score"));
+        }
+    }
+    inline int get_paper_result(const char desired_result) {
+        switch (desired_result) {
+        case Guide::Response::Result::draw:
+            return(Score::Shape::paper + Score::Result::draw);
+        case Guide::Response::Result::loss:
+            return(Score::Shape::rock + Score::Result::loss);
+        case Guide::Response::Result::win:
+            return(Score::Shape::scissors + Score::Result::win);
+        default:
+            throw(std::exception("Get paper result score"));
+        }
+    }
+    inline int get_scissors_result(const char desired_result) {
+        switch (desired_result) {
+        case Guide::Response::Result::draw:
+            return(Score::Shape::scissors + Score::Result::draw);
+        case Guide::Response::Result::loss:
+            return(Score::Shape::paper + Score::Result::loss);
+        case Guide::Response::Result::win:
+            return(Score::Shape::rock + Score::Result::win);
+        default:
+            throw(std::exception("Get scissors result score"));
+        }
+    }
+} // namespace PartTwo
+
 namespace {
+
+    constexpr auto expected_line_char_count{ 3 }; // <ShapeChar><Space><ResponseChar>
 
     class CInputFile {
     public:
@@ -50,72 +138,41 @@ namespace {
         std::ifstream file;
     };
 
-    inline int get_rock_result(const char your_response) {
-        switch (your_response) {
-        case Guide::YourResponse::paper:
-            return(Score::Shape::paper + Score::Result::win);
-        case Guide::YourResponse::scissors:
-            return(Score::Shape::scissors + Score::Result::loss);
-        case Guide::YourResponse::rock:
-            return(Score::Shape::rock + Score::Result::draw);
-        default:
-            throw(std::exception("Get rock score"));
-        }
-    }
-    inline int get_paper_result(const char your_response) {
-        switch (your_response) {
-        case Guide::YourResponse::scissors:
-            return(Score::Shape::scissors + Score::Result::win);
-        case Guide::YourResponse::rock:
-            return(Score::Shape::rock + Score::Result::loss);
-        case Guide::YourResponse::paper:
-            return(Score::Shape::paper + Score::Result::draw);
-        default:
-            throw(std::exception("Get paper score"));
-        }
-    }
-    inline int get_scissors_result(const char your_response) {
-        switch (your_response) {
-        case Guide::YourResponse::rock:
-            return(Score::Shape::rock + Score::Result::win);
-        case Guide::YourResponse::paper:
-            return(Score::Shape::paper + Score::Result::loss);
-        case Guide::YourResponse::scissors:
-            return(Score::Shape::scissors + Score::Result::draw);
-        default:
-            throw(std::exception("Get scissors score"));
-        }
-    }
-    int calculate_total_score(std::ifstream& input_file) {
-        
+    struct Scores {
+        int by_play{ 0 };
+        int by_result{ 0 };
+    };
+    Scores calculate_total_scores(std::ifstream& input_file) {
+
         assert(input_file.is_open());
 
-        constexpr auto expected_line_char_count { 3 }; // <ShapeChar><Space><ResponseChar>
-        constexpr auto opponent_shape_pos       { 0 };
-        constexpr auto response_shape_pos       { 2 };
-
-        auto total_score{ 0 };
+        // First character is the opponent's play, the second is the response you should throw.
+        constexpr auto opponent_shape_pos{ 0 };
+        constexpr auto guide_recommendation_pos{ 2 };
+        Scores scores;
         for (std::string line; std::getline(input_file, line);) {
 
             if (expected_line_char_count > line.size()) { throw(std::exception("Check character count")); }
 
             switch (line[opponent_shape_pos]) {
             case Guide::OpponentShape::rock:
-                total_score += get_rock_result(line[response_shape_pos]);
+                scores.by_play += ByPlay::get_rock_result(line[guide_recommendation_pos]);
+                scores.by_result += ByResult::get_rock_result(line[guide_recommendation_pos]);
                 break;
             case Guide::OpponentShape::paper:
-                total_score += get_paper_result(line[response_shape_pos]);
+                scores.by_play += ByPlay::get_paper_result(line[guide_recommendation_pos]);
+                scores.by_result += ByResult::get_paper_result(line[guide_recommendation_pos]);
                 break;
             case Guide::OpponentShape::scissors:
-                total_score += get_scissors_result(line[response_shape_pos]);
+                scores.by_play += ByPlay::get_scissors_result(line[guide_recommendation_pos]);
+                scores.by_result += ByResult::get_scissors_result(line[guide_recommendation_pos]);
                 break;
             default:
                 throw(std::exception("Get score for shape"));
             }
 
         }
-
-        return(total_score);
+        return(scores);
     }
 }
 
@@ -127,11 +184,12 @@ int main() try {
 
     CInputFile input_file(input_file_path);
 
-    std::cout << "Calculating...\n";
+    std::cout << "Calculating Scores...\n";
+    const auto scores{ calculate_total_scores(input_file.file) };
+    std::cout << "By Play Score: " << std::dec << scores.by_play << "\n\n";
 
-    const auto score{ calculate_total_score(input_file.file) };
-
-    std::cout << "Score: " << std::dec << score << "\n";
+    std::cout << "Calculating Part Two...\n";
+    std::cout << "By Result Score: " << std::dec << scores.by_result << "\n\n";
 
     return(EXIT_SUCCESS);
 }
