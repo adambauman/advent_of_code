@@ -1,3 +1,5 @@
+#include <FileSystem/FileSystem.h>
+
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -11,18 +13,6 @@ constexpr auto debug{ false };
 #endif
 
 namespace {
-    class CInputFile {
-    public:
-
-        CInputFile(const std::string& path) {
-            this->file.exceptions(std::ifstream::badbit);
-            this->file.open(path);
-        }
-        ~CInputFile() { this->file.close(); }
-
-    public:
-        std::ifstream file;
-    };
 
     int inline get_priority(const char item) {
 

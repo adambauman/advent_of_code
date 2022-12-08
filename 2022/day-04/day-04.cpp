@@ -1,3 +1,5 @@
+#include <FileSystem/FileSystem.h>
+
 #include <iostream>
 #include <fstream>
 #include <cassert>
@@ -29,19 +31,7 @@ namespace Number {
 }
 
 namespace {
-    class CInputFile {
-    public:
-
-        CInputFile(const std::string& path) {
-            this->file.exceptions(std::ifstream::badbit);
-            this->file.open(path);
-        }
-        ~CInputFile() { this->file.close(); }
-
-    public:
-        std::ifstream file;
-    };
-
+    
     std::pair<int, int> get_range(const std::string& pair) {
 
         assert(!pair.empty());

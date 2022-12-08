@@ -7,9 +7,13 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "day-02", "day-02\day-02.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "day-03", "day-03\day-03.vcxproj", "{3DA006E9-09AB-46F8-B687-40F6FC225FF6}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Helpers", "..\Helpers\Helpers.vcxproj", "{946A51C7-4E7B-4149-BFE0-4FAC9E5C43AD}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "day-04", "day-04\day-04.vcxproj", "{15C9200D-EB17-4DDB-BEBA-BB4A93D3C85C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "day-05", "day-05\day-05.vcxproj", "{51F719B8-2CBC-4F82-A7A3-EDE17518389D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helpers", "Helpers", "{3985217F-6B36-4A4D-B8C5-C4591445858F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileSystem", "..\Helpers\FileSystem.vcxitems", "{A5667351-9E3F-420E-A5A2-BCB94990FFDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,18 +49,6 @@ Global
 		{3DA006E9-09AB-46F8-B687-40F6FC225FF6}.Release|x64.Build.0 = Release|x64
 		{3DA006E9-09AB-46F8-B687-40F6FC225FF6}.Release|x86.ActiveCfg = Release|Win32
 		{3DA006E9-09AB-46F8-B687-40F6FC225FF6}.Release|x86.Build.0 = Release|Win32
-		{946A51C7-4E7B-4149-BFE0-4FAC9E5C43AD}.Debug|ARM64.ActiveCfg = Debug|x64
-		{946A51C7-4E7B-4149-BFE0-4FAC9E5C43AD}.Debug|ARM64.Build.0 = Debug|x64
-		{946A51C7-4E7B-4149-BFE0-4FAC9E5C43AD}.Debug|x64.ActiveCfg = Debug|x64
-		{946A51C7-4E7B-4149-BFE0-4FAC9E5C43AD}.Debug|x64.Build.0 = Debug|x64
-		{946A51C7-4E7B-4149-BFE0-4FAC9E5C43AD}.Debug|x86.ActiveCfg = Debug|Win32
-		{946A51C7-4E7B-4149-BFE0-4FAC9E5C43AD}.Debug|x86.Build.0 = Debug|Win32
-		{946A51C7-4E7B-4149-BFE0-4FAC9E5C43AD}.Release|ARM64.ActiveCfg = Release|x64
-		{946A51C7-4E7B-4149-BFE0-4FAC9E5C43AD}.Release|ARM64.Build.0 = Release|x64
-		{946A51C7-4E7B-4149-BFE0-4FAC9E5C43AD}.Release|x64.ActiveCfg = Release|x64
-		{946A51C7-4E7B-4149-BFE0-4FAC9E5C43AD}.Release|x64.Build.0 = Release|x64
-		{946A51C7-4E7B-4149-BFE0-4FAC9E5C43AD}.Release|x86.ActiveCfg = Release|Win32
-		{946A51C7-4E7B-4149-BFE0-4FAC9E5C43AD}.Release|x86.Build.0 = Release|Win32
 		{15C9200D-EB17-4DDB-BEBA-BB4A93D3C85C}.Debug|ARM64.ActiveCfg = Debug|x64
 		{15C9200D-EB17-4DDB-BEBA-BB4A93D3C85C}.Debug|ARM64.Build.0 = Debug|x64
 		{15C9200D-EB17-4DDB-BEBA-BB4A93D3C85C}.Debug|x64.ActiveCfg = Debug|x64
@@ -69,11 +61,33 @@ Global
 		{15C9200D-EB17-4DDB-BEBA-BB4A93D3C85C}.Release|x64.Build.0 = Release|x64
 		{15C9200D-EB17-4DDB-BEBA-BB4A93D3C85C}.Release|x86.ActiveCfg = Release|Win32
 		{15C9200D-EB17-4DDB-BEBA-BB4A93D3C85C}.Release|x86.Build.0 = Release|Win32
+		{51F719B8-2CBC-4F82-A7A3-EDE17518389D}.Debug|ARM64.ActiveCfg = Debug|x64
+		{51F719B8-2CBC-4F82-A7A3-EDE17518389D}.Debug|ARM64.Build.0 = Debug|x64
+		{51F719B8-2CBC-4F82-A7A3-EDE17518389D}.Debug|x64.ActiveCfg = Debug|x64
+		{51F719B8-2CBC-4F82-A7A3-EDE17518389D}.Debug|x64.Build.0 = Debug|x64
+		{51F719B8-2CBC-4F82-A7A3-EDE17518389D}.Debug|x86.ActiveCfg = Debug|Win32
+		{51F719B8-2CBC-4F82-A7A3-EDE17518389D}.Debug|x86.Build.0 = Debug|Win32
+		{51F719B8-2CBC-4F82-A7A3-EDE17518389D}.Release|ARM64.ActiveCfg = Release|x64
+		{51F719B8-2CBC-4F82-A7A3-EDE17518389D}.Release|ARM64.Build.0 = Release|x64
+		{51F719B8-2CBC-4F82-A7A3-EDE17518389D}.Release|x64.ActiveCfg = Release|x64
+		{51F719B8-2CBC-4F82-A7A3-EDE17518389D}.Release|x64.Build.0 = Release|x64
+		{51F719B8-2CBC-4F82-A7A3-EDE17518389D}.Release|x86.ActiveCfg = Release|Win32
+		{51F719B8-2CBC-4F82-A7A3-EDE17518389D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A5667351-9E3F-420E-A5A2-BCB94990FFDF} = {3985217F-6B36-4A4D-B8C5-C4591445858F}
+	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7C44C521-6209-4AAD-8740-0BF53A049EDA}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\Helpers\FileSystem.vcxitems*{15c9200d-eb17-4ddb-beba-bb4a93d3c85c}*SharedItemsImports = 4
+		..\Helpers\FileSystem.vcxitems*{3da006e9-09ab-46f8-b687-40f6fc225ff6}*SharedItemsImports = 4
+		..\Helpers\FileSystem.vcxitems*{51f719b8-2cbc-4f82-a7a3-ede17518389d}*SharedItemsImports = 4
+		..\Helpers\FileSystem.vcxitems*{73dc3ed1-5272-481b-a2f4-85c91abfbfd2}*SharedItemsImports = 4
+		..\Helpers\FileSystem.vcxitems*{a5667351-9e3f-420e-a5a2-bcb94990ffdf}*SharedItemsImports = 9
 	EndGlobalSection
 EndGlobal

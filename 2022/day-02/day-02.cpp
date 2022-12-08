@@ -1,3 +1,4 @@
+#include <FileSystem/FileSystem.h>
 
 #include <cassert>
 #include <fstream>
@@ -125,18 +126,6 @@ namespace ByResult {
 namespace {
 
     constexpr auto expected_line_char_count{ 3 }; // <ShapeChar><Space><ResponseChar>
-
-    class CInputFile {
-    public:
-        CInputFile(const std::string& path) {
-            this->file.exceptions(std::ifstream::badbit);
-            this->file.open(path);
-        }
-        ~CInputFile() { this->file.close(); }
-
-    public:
-        std::ifstream file;
-    };
 
     struct Scores {
         int by_play{ 0 };
