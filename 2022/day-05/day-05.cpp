@@ -186,13 +186,10 @@ namespace Calculate {
             return(index);
         }
     }
-    void process_move(std::vector<std::vector<char>>& stacks, const Instructions::Move &move) {
+    void process_move(
+        std::vector<std::vector<char>>& stacks, 
+        const Instructions::Move &move) {
 
-        Instructions::output_move_to_console(move);
-        if (8 == move.crate_count && 1 == move.source_stack && 7 == move.dest_stack) {
-
-            std::cout << "Gotcha\n";
-        }
         for (auto crates_moved{ 0 }; move.crate_count > crates_moved; ++crates_moved) {
 
             auto source_y{ get_top_crate_y(stacks, move.source_stack) };
@@ -205,6 +202,26 @@ namespace Calculate {
             source_value = '\0';
         }
     }
+    void process_multigrab_move(
+        std::vector<std::vector<char>>& stacks,
+        const Instructions::Move& move) {
+
+        auto source_y{ (get_top_crate_y(stacks, move.source_stack) - 1) + move.crate_count }; // Gross
+        auto dest_y{ get_top_crate_y(stacks, move.dest_stack) - 1 };
+        for (
+            auto crates_moved{ 0 }; 
+            move.crate_count > crates_moved; 
+            ++crates_moved, --source_y, --dest_y) {
+
+            auto& source{ stacks[source_y][move.source_stack] };
+            stacks[dest_y][move.dest_stack] = source;
+            source = '\0';
+        }
+
+
+
+
+    }
     std::vector<std::vector<char>> crate_positions(
         const std::vector<Instructions::Move>& moves,
         std::vector<std::vector<char>> stacks) {
@@ -213,11 +230,24 @@ namespace Calculate {
         assert(!stacks.empty());
 
         for (const auto& move : moves) {
+            
             process_move(stacks, move);
-
             //Stacks::output_stacks_to_console(stacks);
         }
+        return(stacks);
+    }
+    std::vector<std::vector<char>> crate_positions_mover_9001(
+        const std::vector<Instructions::Move>& moves,
+        std::vector<std::vector<char>> stacks) {
 
+        assert(!moves.empty());
+        assert(!stacks.empty());
+
+        for (const auto& move : moves) {
+
+            process_multigrab_move(stacks, move);
+            //Stacks::output_stacks_to_console(stacks);
+        }
         return(stacks);
     }
 }
@@ -240,8 +270,11 @@ int main() try {
 
     std::cout << "Calculation crate positions...\n";
     const auto post_crane_stacks{ Calculate::crate_positions(moves, stacks) };
-
     Stacks::output_stacks_to_console(post_crane_stacks);
+
+    std::cout << "Switching to Crate Mover 9001, calculating...\n";
+    const auto post_crane_9001_stacks{ Calculate::crate_positions_mover_9001(moves, stacks) };
+    Stacks::output_stacks_to_console(post_crane_9001_stacks);
 
     return(EXIT_SUCCESS);
 }
