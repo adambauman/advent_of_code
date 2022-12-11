@@ -4,6 +4,7 @@
 #include <cassert>
 #include <sstream>
 #include <Windows.h>
+//#include <algorithm>
 
 #include <FileSystem/FileSystem.h>
 #include <String/StringHelpers.h>
@@ -12,10 +13,6 @@
 constexpr auto stack_count{ 9 };
 constexpr auto initial_stack_height{ 8 };
 
-// Forwards
-namespace Instructions {
-
-}
 
 namespace Stacks {
     void output_stacks_to_console(const std::vector<std::vector<char>>& stacks) {
@@ -89,20 +86,16 @@ namespace Instructions {
         int crate_count  { 0 };
         int source_stack { 0 };
         int dest_stack   { 0 };
-        
-    public:
-        [[nodiscard]] inline bool is_valid() const {
-            return(0 != crate_count && 0 != source_stack && 0 != dest_stack);
-        }
     };
 #ifdef _DEBUG
     void output_move_to_console(const Instructions::Move& move) {
 
         namespace Text = Instructions::Text;
+        // Don't forget to bump source and destination up by one. In text they're 1-based!
         std::cout
             << Text::move << " " << std::dec << move.crate_count << " "
-            << Text::from << " " << std::dec << move.source_stack << " "
-            << Text::to << " " << std::dec << move.dest_stack << "\n";
+            << Text::from << " " << std::dec << move.source_stack + 1 << " "
+            << Text::to << " " << std::dec << move.dest_stack + 1 << "\n";
     }
 #endif
     [[nodiscard]] int int_from_string(const std::string& the_string) {
@@ -140,7 +133,7 @@ namespace Instructions {
             for (; 
                 !Char::is_empty_or_whitespace(line[line_pos]) || line.size() < line_pos; 
                 source += line[line_pos], ++line_pos) {}
-            move.source_stack = int_from_string(source);
+            move.source_stack = int_from_string(source) - 1; // File is 1-based, rollback 1 to make 0-based.
         }
         line_pos += (space + Text::to.size() + space); // Move to the destination number.
         {
@@ -148,7 +141,7 @@ namespace Instructions {
             for (; 
                 !Char::is_empty_or_whitespace(line[line_pos]) && line.size() > line_pos; 
                 destination += line[line_pos], ++line_pos) {}
-            move.dest_stack = int_from_string(destination);
+            move.dest_stack = int_from_string(destination) - 1; // File is 1-based, rollback 1 to make 0-based.
         }
 
         return(move);
@@ -167,7 +160,7 @@ namespace Instructions {
         if (line.npos == line.find(Text::move)) { continue; }
 
 #ifdef _DEBUG
-        output_move_to_console(read_move(line));
+        //output_move_to_console(read_move(line));
 #endif
         moves.push_back(read_move(line));
     }
@@ -176,30 +169,41 @@ namespace Instructions {
     }
 }
 namespace Calculate {
-    int get_top_crate_position(const std::vector<std::vector<char>>& stacks, const int stack_index) {
+    int get_top_crate_y(const std::vector<std::vector<char>>& stacks, const int source_stack) {
 
-        assert(stack_index <= stack_count);
-
+        //.....
+        //.....
+        //S....
+        //L...B
+        //F.S.Z
+        //ZRN.R
         namespace Char = Helpers::String::Char;
-        auto& stack{ stacks[stack_index] };
-        for (auto crate_index{ 0 }; stack.size() > crate_index; ++crate_index) {
+        for (auto index{ 0 }; stacks.size() > index; ++index) {
 
-            if (Char::is_empty_or_whitespace(stack[crate_index])) { continue; }
+            const auto& stack_row{ stacks[index] };
+            if (Char::is_empty_or_whitespace(stack_row[source_stack])) { continue; }
 
-            return(crate_index);
+            return(index);
         }
     }
     void process_move(std::vector<std::vector<char>>& stacks, const Instructions::Move &move) {
 
-        assert(move.is_valid());
+        Instructions::output_move_to_console(move);
+        if (8 == move.crate_count && 1 == move.source_stack && 7 == move.dest_stack) {
 
-        for (auto crates_moved{ 0 }; move.crate_count > crates_moved; ++crates_moved) {
-            const auto top_crate_pos{ get_top_crate_position(stacks, move.source_stack) };
-
+            std::cout << "Gotcha\n";
         }
+        for (auto crates_moved{ 0 }; move.crate_count > crates_moved; ++crates_moved) {
 
+            auto source_y{ get_top_crate_y(stacks, move.source_stack) };
+            auto& source_value{ stacks[source_y][move.source_stack] };
 
+            // Back it up one to target open space above.
+            const auto dest_y{ get_top_crate_y(stacks, move.dest_stack) - 1 }; 
 
+            stacks[dest_y][move.dest_stack] = source_value;
+            source_value = '\0';
+        }
     }
     std::vector<std::vector<char>> crate_positions(
         const std::vector<Instructions::Move>& moves,
@@ -210,6 +214,8 @@ namespace Calculate {
 
         for (const auto& move : moves) {
             process_move(stacks, move);
+
+            //Stacks::output_stacks_to_console(stacks);
         }
 
         return(stacks);
@@ -233,10 +239,9 @@ int main() try {
     auto stacks{ Stacks::read_stacks(input_file.file) };
 
     std::cout << "Calculation crate positions...\n";
-    //const auto post_crane_stacks{ Calculate::crate_positions(moves, stacks) };
-    //assert(stacks.size() == post_crane_stacks.size());
+    const auto post_crane_stacks{ Calculate::crate_positions(moves, stacks) };
 
-    //Stacks::output_stacks_to_console(post_crane_stacks);
+    Stacks::output_stacks_to_console(post_crane_stacks);
 
     return(EXIT_SUCCESS);
 }
