@@ -16,6 +16,9 @@ namespace Packet {
     namespace Header {
         constexpr auto length{ 4 };
     }
+    namespace Message {
+        constexpr auto length{ 14 };
+    }
 }
 
 namespace {
@@ -43,17 +46,23 @@ int main() try {
     int current_step{ 0 };
     std::string_view string_view(input);
 
+    // Part 1
+    //const auto search_length{ Packet::Header::length };
+
+    // Part 2
+    const auto search_length{ Packet::Message::length };
+
     namespace Char = Helpers::String::Char;
     auto header_offset{ 0 };
     bool first_run{ true };
     for (auto current_step(0);
-        string_view.length() > current_step + Packet::Header::length;
+        string_view.length() > current_step + search_length;
         ++current_step) {
 
         if constexpr (debug) { std::cout << std::dec << current_step << " "; }
         
         std::string_view sub_view;
-        sub_view = string_view.substr(current_step, Packet::Header::length);
+        sub_view = string_view.substr(current_step, search_length);
         const auto test_set{ std::set<char>(sub_view.cbegin(), sub_view.cend()) };
         if (sub_view.size() != test_set.size()) { continue; }
 
@@ -62,7 +71,7 @@ int main() try {
         break;
     }
 
-    std::cout << "Header offset: " << std::dec << (header_offset + Packet::Header::length) << "\n";
+    std::cout << "Header offset: " << std::dec << (header_offset + search_length) << "\n";
     
     return(EXIT_SUCCESS);
 }
