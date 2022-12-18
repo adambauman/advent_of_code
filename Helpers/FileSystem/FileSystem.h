@@ -2,6 +2,7 @@
 
 #include <string>
 #include <fstream>
+#include <sstream>
 
 class CInputFile {
     public:
@@ -20,3 +21,19 @@ class CInputFile {
     public:
         std::ifstream file;
 };
+
+namespace FileSystem {
+    namespace File {
+        [[nodiscard]] inline std::string read(const std::string& input_path) {
+
+            CInputFile input{ input_path };
+            std::stringstream string_stream;
+            string_stream << input.file.rdbuf();
+            if (input.file.fail()) { throw(std::exception("Read input stream buffer")); }
+
+            if (string_stream.str().empty()) { throw(std::exception("Check if contents read from buffer is empty")); }
+
+            return(string_stream.str());
+        }
+    }
+}

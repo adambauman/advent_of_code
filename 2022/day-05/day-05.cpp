@@ -17,7 +17,7 @@ constexpr auto initial_stack_height{ 8 };
 namespace Stacks {
     void output_stacks_to_console(const std::vector<std::vector<char>>& stacks) {
 
-        namespace Char = Helpers::String::Char;
+        namespace Char = Helpers::Char;
         std::cout
             << "Stack Output:\n"
             << "------------------------------------------\n";
@@ -117,7 +117,7 @@ namespace Instructions {
         assert(!line.empty());
 
         Move move;
-        namespace Char = Helpers::String::Char;
+        namespace Char = Helpers::Char;
         constexpr auto space{ 1 };
         size_t line_pos{ Text::move.size() + space }; // Move position to the stack count.
         {
@@ -177,7 +177,7 @@ namespace Calculate {
         //L...B
         //F.S.Z
         //ZRN.R
-        namespace Char = Helpers::String::Char;
+        namespace Char = Helpers::Char;
         for (auto index{ 0 }; stacks.size() > index; ++index) {
 
             const auto& stack_row{ stacks[index] };

@@ -52,7 +52,7 @@ int main() try {
     // Part 2
     const auto search_length{ Packet::Message::length };
 
-    namespace Char = Helpers::String::Char;
+    namespace Char = Helpers::Char;
     auto header_offset{ 0 };
     bool first_run{ true };
     for (auto current_step(0);

@@ -15,9 +15,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Helpers", "Helpers", "{3985
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileSystem", "..\Helpers\FileSystem.vcxitems", "{A5667351-9E3F-420E-A5A2-BCB94990FFDF}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "String", "..\Helpers\String\String.vcxitems", "{3B6D437E-1721-456D-B83B-4777D703215B}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "String", "..\Helpers\String.vcxitems", "{3B6D437E-1721-456D-B83B-4777D703215B}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "day-06", "day-06\day-06.vcxproj", "{54BB6C31-2AAA-4091-B14D-7A025C24E843}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "day-07", "day-07\day-07.vcxproj", "{025D7F78-CC21-427A-9A92-38886608B722}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Error", "..\Helpers\Error.vcxitems", "{4E172EF4-4F44-460C-9D5C-34F9D63564F0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VirtualDisk", "..\Helpers\VirtualDisk.vcxitems", "{248B4A70-7DAD-4862-AF1F-DD8051CECDC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,6 +95,18 @@ Global
 		{54BB6C31-2AAA-4091-B14D-7A025C24E843}.Release|x64.Build.0 = Release|x64
 		{54BB6C31-2AAA-4091-B14D-7A025C24E843}.Release|x86.ActiveCfg = Release|Win32
 		{54BB6C31-2AAA-4091-B14D-7A025C24E843}.Release|x86.Build.0 = Release|Win32
+		{025D7F78-CC21-427A-9A92-38886608B722}.Debug|ARM64.ActiveCfg = Debug|x64
+		{025D7F78-CC21-427A-9A92-38886608B722}.Debug|ARM64.Build.0 = Debug|x64
+		{025D7F78-CC21-427A-9A92-38886608B722}.Debug|x64.ActiveCfg = Debug|x64
+		{025D7F78-CC21-427A-9A92-38886608B722}.Debug|x64.Build.0 = Debug|x64
+		{025D7F78-CC21-427A-9A92-38886608B722}.Debug|x86.ActiveCfg = Debug|Win32
+		{025D7F78-CC21-427A-9A92-38886608B722}.Debug|x86.Build.0 = Debug|Win32
+		{025D7F78-CC21-427A-9A92-38886608B722}.Release|ARM64.ActiveCfg = Release|x64
+		{025D7F78-CC21-427A-9A92-38886608B722}.Release|ARM64.Build.0 = Release|x64
+		{025D7F78-CC21-427A-9A92-38886608B722}.Release|x64.ActiveCfg = Release|x64
+		{025D7F78-CC21-427A-9A92-38886608B722}.Release|x64.Build.0 = Release|x64
+		{025D7F78-CC21-427A-9A92-38886608B722}.Release|x86.ActiveCfg = Release|Win32
+		{025D7F78-CC21-427A-9A92-38886608B722}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,18 +114,26 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A5667351-9E3F-420E-A5A2-BCB94990FFDF} = {3985217F-6B36-4A4D-B8C5-C4591445858F}
 		{3B6D437E-1721-456D-B83B-4777D703215B} = {3985217F-6B36-4A4D-B8C5-C4591445858F}
+		{4E172EF4-4F44-460C-9D5C-34F9D63564F0} = {3985217F-6B36-4A4D-B8C5-C4591445858F}
+		{248B4A70-7DAD-4862-AF1F-DD8051CECDC8} = {3985217F-6B36-4A4D-B8C5-C4591445858F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7C44C521-6209-4AAD-8740-0BF53A049EDA}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\Helpers\Error.vcxitems*{025d7f78-cc21-427a-9a92-38886608b722}*SharedItemsImports = 4
+		..\Helpers\FileSystem.vcxitems*{025d7f78-cc21-427a-9a92-38886608b722}*SharedItemsImports = 4
+		..\Helpers\String.vcxitems*{025d7f78-cc21-427a-9a92-38886608b722}*SharedItemsImports = 4
+		..\Helpers\VirtualDisk.vcxitems*{025d7f78-cc21-427a-9a92-38886608b722}*SharedItemsImports = 4
 		..\Helpers\FileSystem.vcxitems*{15c9200d-eb17-4ddb-beba-bb4a93d3c85c}*SharedItemsImports = 4
-		..\Helpers\String\String.vcxitems*{3b6d437e-1721-456d-b83b-4777d703215b}*SharedItemsImports = 9
+		..\Helpers\VirtualDisk.vcxitems*{248b4a70-7dad-4862-af1f-dd8051cecdc8}*SharedItemsImports = 9
+		..\Helpers\String.vcxitems*{3b6d437e-1721-456d-b83b-4777d703215b}*SharedItemsImports = 9
 		..\Helpers\FileSystem.vcxitems*{3da006e9-09ab-46f8-b687-40f6fc225ff6}*SharedItemsImports = 4
+		..\Helpers\Error.vcxitems*{4e172ef4-4f44-460c-9d5c-34f9d63564f0}*SharedItemsImports = 9
 		..\Helpers\FileSystem.vcxitems*{51f719b8-2cbc-4f82-a7a3-ede17518389d}*SharedItemsImports = 4
-		..\Helpers\String\String.vcxitems*{51f719b8-2cbc-4f82-a7a3-ede17518389d}*SharedItemsImports = 4
+		..\Helpers\String.vcxitems*{51f719b8-2cbc-4f82-a7a3-ede17518389d}*SharedItemsImports = 4
 		..\Helpers\FileSystem.vcxitems*{54bb6c31-2aaa-4091-b14d-7a025c24e843}*SharedItemsImports = 4
-		..\Helpers\String\String.vcxitems*{54bb6c31-2aaa-4091-b14d-7a025c24e843}*SharedItemsImports = 4
+		..\Helpers\String.vcxitems*{54bb6c31-2aaa-4091-b14d-7a025c24e843}*SharedItemsImports = 4
 		..\Helpers\FileSystem.vcxitems*{73dc3ed1-5272-481b-a2f4-85c91abfbfd2}*SharedItemsImports = 4
 		..\Helpers\FileSystem.vcxitems*{a5667351-9e3f-420e-a5a2-bcb94990ffdf}*SharedItemsImports = 9
 	EndGlobalSection

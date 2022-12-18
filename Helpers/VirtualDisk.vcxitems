@@ -3,7 +3,7 @@
   <PropertyGroup Label="Globals">
     <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <ItemsProjectGuid>{3b6d437e-1721-456d-b83b-4777d703215b}</ItemsProjectGuid>
+    <ItemsProjectGuid>{248b4a70-7dad-4862-af1f-dd8051cecdc8}</ItemsProjectGuid>
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
@@ -14,9 +14,9 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="$(MSBuildThisFileDirectory)StringHelpers.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)VirtualDisk/VirtualDisk.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="$(MSBuildThisFileDirectory)StringHelpers.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)VirtualDisk/VirtualDisk.cpp" />
   </ItemGroup>
 </Project>
