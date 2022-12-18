@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileSystem", "..\Helpers\Fi
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "String", "..\Helpers\String\String.vcxitems", "{3B6D437E-1721-456D-B83B-4777D703215B}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "day-06", "day-06\day-06.vcxproj", "{54BB6C31-2AAA-4091-B14D-7A025C24E843}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|ARM64 = Debug|ARM64
@@ -75,6 +77,18 @@ Global
 		{51F719B8-2CBC-4F82-A7A3-EDE17518389D}.Release|x64.Build.0 = Release|x64
 		{51F719B8-2CBC-4F82-A7A3-EDE17518389D}.Release|x86.ActiveCfg = Release|Win32
 		{51F719B8-2CBC-4F82-A7A3-EDE17518389D}.Release|x86.Build.0 = Release|Win32
+		{54BB6C31-2AAA-4091-B14D-7A025C24E843}.Debug|ARM64.ActiveCfg = Debug|x64
+		{54BB6C31-2AAA-4091-B14D-7A025C24E843}.Debug|ARM64.Build.0 = Debug|x64
+		{54BB6C31-2AAA-4091-B14D-7A025C24E843}.Debug|x64.ActiveCfg = Debug|x64
+		{54BB6C31-2AAA-4091-B14D-7A025C24E843}.Debug|x64.Build.0 = Debug|x64
+		{54BB6C31-2AAA-4091-B14D-7A025C24E843}.Debug|x86.ActiveCfg = Debug|Win32
+		{54BB6C31-2AAA-4091-B14D-7A025C24E843}.Debug|x86.Build.0 = Debug|Win32
+		{54BB6C31-2AAA-4091-B14D-7A025C24E843}.Release|ARM64.ActiveCfg = Release|x64
+		{54BB6C31-2AAA-4091-B14D-7A025C24E843}.Release|ARM64.Build.0 = Release|x64
+		{54BB6C31-2AAA-4091-B14D-7A025C24E843}.Release|x64.ActiveCfg = Release|x64
+		{54BB6C31-2AAA-4091-B14D-7A025C24E843}.Release|x64.Build.0 = Release|x64
+		{54BB6C31-2AAA-4091-B14D-7A025C24E843}.Release|x86.ActiveCfg = Release|Win32
+		{54BB6C31-2AAA-4091-B14D-7A025C24E843}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +106,8 @@ Global
 		..\Helpers\FileSystem.vcxitems*{3da006e9-09ab-46f8-b687-40f6fc225ff6}*SharedItemsImports = 4
 		..\Helpers\FileSystem.vcxitems*{51f719b8-2cbc-4f82-a7a3-ede17518389d}*SharedItemsImports = 4
 		..\Helpers\String\String.vcxitems*{51f719b8-2cbc-4f82-a7a3-ede17518389d}*SharedItemsImports = 4
+		..\Helpers\FileSystem.vcxitems*{54bb6c31-2aaa-4091-b14d-7a025c24e843}*SharedItemsImports = 4
+		..\Helpers\String\String.vcxitems*{54bb6c31-2aaa-4091-b14d-7a025c24e843}*SharedItemsImports = 4
 		..\Helpers\FileSystem.vcxitems*{73dc3ed1-5272-481b-a2f4-85c91abfbfd2}*SharedItemsImports = 4
 		..\Helpers\FileSystem.vcxitems*{a5667351-9e3f-420e-a5a2-bcb94990ffdf}*SharedItemsImports = 9
 	EndGlobalSection
