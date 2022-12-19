@@ -36,4 +36,7 @@ namespace FileSystem {
             return(string_stream.str());
         }
     }
+    namespace Disk {
+        [[nodiscard]] std::string get_mount_point(const std::wstring& physical_path);
+    }
 }

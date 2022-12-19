@@ -14,5 +14,7 @@ namespace VirtualDisk {
 			const std::wstring& path, uint64_t max_allocation, 
 			const OverwriteExisting overwrite_existing
 		);
+
+		[[nodiscard]] std::string attach_vhdx(HANDLE vhd_handle);
 	}
 }

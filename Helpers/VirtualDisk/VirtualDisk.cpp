@@ -72,3 +72,33 @@
 
     return(vhd_handle);
 }
+
+[[nodiscard]]std::string VirtualDisk::Vhd::attach_vhdx(HANDLE vhd_handle) {
+
+    assert(INVALID_HANDLE_VALUE != vhd_handle);
+
+    auto vhd_result = ::AttachVirtualDisk(
+        vhd_handle,
+        nullptr,
+        ATTACH_VIRTUAL_DISK_FLAG_NONE,
+        0,
+        nullptr,
+        nullptr
+    );
+    if (ERROR_SUCCESS != vhd_result) { throw(std::exception("Attach VHDX")); }
+
+    //std::wstring vhd_physical_path(MAX_PATH, '\0');
+    //unsigned long path_size{ 0 };
+    //vhd_result = ::GetVirtualDiskPhysicalPath(
+    //    vhd_handle,
+    //    &path_size,
+    //    vhd_physical_path.data()
+    //);
+    //if (ERROR_SUCCESS != vhd_result) { throw(std::exception("Get VHDX physical path")); }
+
+    //vhd_physical_path.resize(path_size);
+    //assert(!vhd_physical_path.empty());
+
+
+        
+}
